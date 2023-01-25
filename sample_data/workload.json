@@ -1,0 +1,16 @@
+{
+  "name": "$word",
+  "motion": {"$choose": {"from": ["Replace","Migrate","Select","Launch"]}},
+  "inProduction": "$bool",
+  "dataStore": {"$choose":  {"from":  ["MongoDB", "RDBMS", "Other Document DB", "None" ]}},
+  "currentHosting": {"$choose": {"from": ["AWS", "Azure", "GCP", "Multiple", "On-Prem", "Hybrid", "Other"]}},
+  "targetCloud":{"$choose":  {"from": ["AWS","Azure","GCP"]}},
+  "workloadType": {"$choose":  {"from": ["Operational","Analytics","Event/Streaming", "Hybrid"]}},
+  "dateCreated": "$now",
+  "description": "$sentence",
+  "lastEdited": {"$date": {"min": "2022-01-01", "max": "2022-12-22"}},
+  "org": {
+    "name": "$company",
+    "_id": "$oid"
+  }
+}

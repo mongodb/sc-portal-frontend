@@ -1,0 +1,79 @@
+[
+    {
+        "name": "getSizing",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getSizings",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "updateSizing",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "autocompleteGetOrgs",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getWorkloads",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getWorkload",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+      "name": "getChampions",
+      "private": false,
+      "run_as_system": true,
+      "disable_arg_logs": true
+    },
+    {
+      "name": "getChampion",
+      "private": false,
+      "run_as_system": true,
+      "disable_arg_logs": true
+    },
+  {
+    "name": "getAccounts",
+    "private": false,
+    "run_as_system": true,
+    "disable_arg_logs": true
+  },
+  {
+    "name": "addAccount",
+    "private": false,
+    "run_as_system": true
+  },
+  {
+    "name": "addContacts",
+    "private": false,
+    "run_as_system": true
+  },
+  {
+    "name": "getContacts",
+    "private": false,
+    "run_as_system": true,
+    "disable_arg_logs": true
+  },
+  {
+    "name": "getContact",
+    "private": false,
+    "run_as_system": true,
+    "disable_arg_logs": true
+  }
+
+]

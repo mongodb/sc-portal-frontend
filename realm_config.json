@@ -1,0 +1,9 @@
+{
+    "app_id": "champion_tracker-ouhal",
+    "config_version": 20210101,
+    "name": "Champion_Tracker",
+    "location": "US-OR",
+    "provider_region": "aws-us-west-2",
+    "deployment_model": "LOCAL",
+    "environment": "development"
+}

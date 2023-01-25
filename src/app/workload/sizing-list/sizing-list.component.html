@@ -1,0 +1,24 @@
+<div class="card shadow-lg mx-4">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-2">
+        <span class="card-title h5">Sizings</span>
+      </div>
+      <div class="align-items-end col-10">
+        <form [formGroup]="searchForm" (ngSubmit)="sizingSearch()">
+          <div class="bg-white border-radius-lg d-flex me-2">
+            <input type="text" class="form-control border-opacity-25 ps-3" formControlName="workload_name" placeholder="Search..">
+            <button class="btn bg-gradient-dark my-1 me-1" type="submit" [disabled]="searchForm.invalid">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>
+

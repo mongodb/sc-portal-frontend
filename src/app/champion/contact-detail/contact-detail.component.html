@@ -1,0 +1,164 @@
+<ng-container *ngIf="contact">
+  <div class="card shadow-lg mx-4">
+    <div class="card-header p-3">
+      <div class="row gx-4">
+        <div class="col-10 my-auto">
+          <div class="h-100">
+            <h5 class="mb-1">
+              {{ contact.fullName }}
+            </h5>
+            <p class="mb-0 font-weight-bold text-sm">
+              {{ contact.role }} - {{ contact.account.name }}
+            </p>
+          </div>
+        </div>
+        <div class="col-2 align-self-end">
+          <a href="{{contact.social.linkedInUrl}}" *ngIf="contact.social.linkedInUrl" target="_blank"><i class="bi bi-linkedin"></i></a>
+          <a class="ms-2" href="{{contact.social.twitter}}" *ngIf="contact.social.twitter" target="_blank"><i class="bi bi-twitter" ></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card shadow-lg mx-4 mt-4">
+    <div class="card-header">
+      <div class="d-flex align-items-center">
+        <h5 class="card-title">Profile</h5>
+        <button class="btn btn-success btn-sm ms-auto" type="submit" [disabled]="contactForm.invalid">Save</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+        <div class="row">
+          <div class="col-8 col-border-left">
+            <p class="text-uppercase text-sm">User Information</p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="firstName" class="form-control-label">First Name</label>
+                  <input class="form-control" id="firstName" type="text" formControlName="firstName" placeholder="Johnathan">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="lastName" class="form-control-label">Last Name</label>
+                  <input class="form-control" id="lastName" type="text" formControlName="lastName" placeholder="Doe">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="preferredName" class="form-control-label">Preferred Name</label>
+                  <input class="form-control" id="preferredName" type="text" formControlName="preferredName" placeholder="John Doe">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="email" class="form-control-label">Email</label>
+                  <input class="form-control"id="email" type="email" placeholder="John@Doe.com" formControlName="email">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="phone" class="form-control-label">Phone</label>
+                  <input class="form-control"id="phone" type="text" placeholder="(555) 123-4567" formControlName="phone">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <p class="text-uppercase text-sm">Location</p>
+            <div class="row" formGroupName="address">
+              <div class="col-auto">
+                <div class="form-group">
+                  <label for="city" class="form-control-label">City</label>
+                  <input class="form-control" type="text" formControlName="city" id="city">
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="form-group">
+                  <label for="state" class="form-control-label">State</label>
+                  <input class="form-control" type="text" formControlName="state" id="state">
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="form-group">
+                  <label for="majorCity" class="form-control-label">Major City</label>
+                  <input class="form-control" type="text" formControlName="nearestMajorCity" id="majorCity">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+    <hr class="horizontal dark">
+    <div class="card-header">
+      <div class="d-flex align-items-center">
+        <h5 class="card-title">Champion Info</h5>
+      </div>
+    </div>
+    <div class="card-body">
+      <ng-container *ngIf="contact.champion">
+        <form [formGroup]="championForm">
+          <div class="row">
+            <div class="col-3">
+              <p class="text-uppercase text-sm">Details</p>
+              <div class="form-group">
+                <label for="championType" class="form-control-label">Type</label>
+                <input class="form-control" type="text" id="championType" formControlName="championType">
+              </div>
+              <div class="form-group">
+                <label for="status" class="form-control-label">Stats</label>
+                <input class="form-control" type="text" id="status" formControlName="status">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <p class="text-uppercase text-sm">Interests</p>
+                <input class="form-control mb-2" placeholder="Personal Interests..." id="interests"
+                       [matChipInputFor]="chipGrid"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)"/>
+                <mat-chip-grid #chipGrid aria-label="Interests">
+                  <mat-chip-row *ngFor="let interest of contact.champion.interests; index as i"
+                                (removed)="remove(i)"
+                                [editable]="false">
+
+                    {{interest}}
+                    <button matChipRemove>
+                      <i class="bi bi-x"></i>
+                    </button>
+                  </mat-chip-row>
+                </mat-chip-grid>
+              </div>
+            </div>
+            <div class="col-3">
+              <p class="text-uppercase text-sm">Product Interests</p>
+              <ul>
+                <li class="list-group-item" *ngFor="let product of products" (click)="toggleInterest(product)">
+                  <span class="badge rounded-pill" *ngIf="hasProductInterest(product)" class="badge bg-success rounded-pill">{{product}} <i class="bi bi-x"></i></span>
+                  <span class="badge rounded-pill" *ngIf="!hasProductInterest(product)" class="badge bg-secondary rounded-pill">{{product}}</span> <i class="bi bi-plus"></i></li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+      <ng-container *ngIf="!contact.champion">
+        <div class="row">
+          <div class="col-auto">
+            <button class="align-content-center btn btn-success">Identify as Champion</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="contact.champion">
+      <div class="card-header">
+        <h5 class="card-title">Development Plan</h5>
+      </div>
+      <div class="card-body">
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

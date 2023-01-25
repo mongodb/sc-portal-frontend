@@ -1,0 +1,102 @@
+<div class="card shadow-lg">
+  <div class="card-header">
+    <h5 class="card-title">Workload Detail</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="workloadForm" (ngSubmit)="saveForm()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name">Workload Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Workload Name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dataStore">Existing System?</label>
+            <select class="form-control" formControlName="inProduction" id="inProduction">
+              <option *ngFor="let status of prodStatuses" value="{{status['key']}}">{{status['text']}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dataStore">Current DataBase</label>
+            <select class="form-control" formControlName="dataStore" id="dataStore">
+              <option *ngFor="let database of databases" value="{{database}}">{{database}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="currentHosting">Current Hosting</label>
+            <select class="form-control" formControlName="currentHosting" id="currentHosting">
+              <option *ngFor="let provider of hostingProviders" value="{{provider}}">{{provider}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="targetCloud">Target Cloud</label>
+            <select class="form-control" formControlName="targetCloud" id="targetCloud">
+              <option *ngFor="let provider of targetProviders" value="{{provider}}">{{provider}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group" formGroupName="org">
+            <label for="org">Parent Org</label>
+            <input type="text" class="form-control" id="org" formControlName="name" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" cols="10" formControlName="description" id="description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto align-items-end">
+          <button class="btn btn-success" (click)="saveForm()" [disabled]="workloadForm.invalid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-header">
+    <div class="row">
+      <div class="col-11">
+        <h5 class="card-title">Sizings</h5>
+      </div>
+      <div class="col-1 align-items-end">
+        <a href="#" [routerLink]="['sizing']" class="btn btn-success btn-round align-items-end"><i class="bi bi-plus-lg"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row" *ngIf="sizings | async as sizings">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date Created</th>
+            <th>Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sizing of sizings">
+            <td><a href="#" [routerLink]="['sizing', sizing._id]">{{sizing.title}}</a></td>
+            <td>{{sizing.description | slice:0:75}}</td>
+            <td>{{ sizing.dateCreated | date: 'short'}}</td>
+            <td>{{ sizing.lastUpdated | date: 'short'}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>

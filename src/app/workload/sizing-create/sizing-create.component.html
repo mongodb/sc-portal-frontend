@@ -1,0 +1,179 @@
+  <div class="card shadow-lg mx-4">
+    <div class="card-header">
+      <h4 class="card-title">MongoDB Atlas Sizing Questionaire</h4>
+      <h6 class="card-subtitle text-muted">Interactive guide to simplify the process of capturing and sharing sizing inputs</h6>
+    </div>
+    <div class="card-header">
+        <div class="card-title" *ngIf="account">New Workload for {{ account.name }}</div>
+    </div>
+    <div class="card-body card-blue p-3">
+      <form [formGroup]="sizingForm" (ngSubmit)="saveForm()">
+      <mat-stepper #stepper linear orientation="horizontal" labelPosition="bottom">
+        <mat-step [stepControl]="sizingForm.controls.contact" label="Workload Details" formGroupName="workload"  [optional]="true" color="primary">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Workload Name</label>
+                <input type="text" class="form-control" id="name" formControlName="name" placeholder="Workload Name" readonly>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dataStore">Production System?</label>
+                <input type="text" class="form-control" id="inProduction" formControlName="inProduction" readonly>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dataStore">Current DataBase</label>
+                <input type="text" class="form-control" id="dataStore" formControlName="dataStore" readonly>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="currentHosting">Current Hosting</label>
+                <input type="text" class="form-control" id="currentHosting" formControlName="currentHosting" readonly>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="targetCloud">Target Cloud</label>
+                <input type="text" class="form-control" id="targetCloud" formControlName="targetCloud" readonly>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" formGroupName="org">
+                <label for="org">Parent Org</label>
+                <input type="text" class="form-control" id="org" formControlName="name" readonly>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" cols="10" formControlName="description" id="description" readonly></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              <button type="button" class="btn btn-outline-secondary" matStepperNext>Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="sizingForm.controls.dataSize" label="Data Sizes" formArrayName="dataSize"  [optional]="true">
+          <p>Provide information about your existing data for any dataset or object that makes up more than 20% of your data total set</p>
+          <ng-container *ngFor="let entry of sizingForm.controls.dataSize.controls; index as i" [formGroupName]="i">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="name">Dataset Name</label>
+                  <input class="form-control" formControlName="name" type="text" id="name">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="recordCount">Record Count</label>
+                  <input class="form-control" formControlName="recordCount" type="text" id="recordCount">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Avg Record Size</label>
+                  <input class="form-control" formControlName="avgRecordSize" type="text">
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-group align-bottom">
+                  <button type="button" (click)="removeDataSizeSection(i)" class="btn btn-round btn-danger align-bottom align-text-bottom"><i class="bi bi-trash2-fill"></i></button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="row">
+            <div class="col-auto">
+            <button class="btn btn-round btn-success" (click)="appendDataSizeSection()"><i class="bi bi-plus-lg"></i></button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-auto">
+              <button type="button" class="btn btn-outline-secondary me-3" matStepperPrevious>Back</button>
+              <button type="button" class="btn btn-outline-secondary" matStepperNext>Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step label="Query Patterns" [optional]="true">
+          <div>You are now done.</div>
+          <div class="row">
+            <div class="col-auto">
+              <button type="button" class="btn btn-outline-secondary me-3" matStepperPrevious>Back</button>
+              <button type="button" class="btn btn-outline-secondary" matStepperNext>Next</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step label="Data Growth/Archive" [optional]="true">
+          <div>You are now done.</div>
+          <div class="row">
+            <div class="col-auto">
+              <button type="button" class="btn btn-outline-secondary me-3" matStepperPrevious>Back</button>
+              <button type="submit" class="btn btn-success" matStepperNext [disabled]="sizingForm.controls.contact.invalid">Save</button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="sizingForm.controls.environments" label="Environments" formArrayName="environments"  [optional]="true">
+          <p>Provide information about your application environments</p>
+          <ng-container *ngFor="let entry of sizingForm.controls.environments.controls; index as i" [formGroupName]="i">
+            <div class="row">
+              <div class="col-md">
+                <div class="form-group">
+                  <label for="env-name">Environment Name</label>
+                  <input class="form-control" formControlName="name" type="text" id="env-name">
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="form-group">
+                  <label for="env-description">Description</label>
+                  <input class="form-control" formControlName="description" type="text" id="env-description">
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="form-group">
+                  <label>Relative Size</label>
+                  <input class="form-control" formControlName="relativeSize" type="text">
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="form-group">
+                  <label>First Month Needed</label>
+                  <select class="form-control" formControlName="monthNeeded">
+                    <option *ngFor="let month of months">{{month}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-group align-bottom">
+                  <button type="button" (click)="removeEnvironmentSection(i)" class="btn btn-round btn-danger align-bottom align-text-bottom"><i class="bi bi-trash2-fill"></i></button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="row">
+            <div class="col-auto">
+              <button class="btn btn-round btn-success" (click)="appendEnvironmentSection()"><i class="bi bi-plus-lg"></i></button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-auto">
+              <button type="button" class="btn btn-outline-secondary me-3" matStepperPrevious>Back</button>
+              <button type="button" class="btn btn-outline-secondary" matStepperNext>Next</button>
+            </div>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </form>
+  </div>
+  <div class="card-footer">
+      <button type="button" class="btn btn-success" (click)="saveForm()" [disabled]="sizingForm.controls.contact.invalid">Save</button>
+  </div>
+</div>

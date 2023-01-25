@@ -1,0 +1,20 @@
+{
+  "firstName": "$first",
+  "lastName": "$last",
+  "preferredName": "$first",
+  "linkedin_urn": "$guid",
+  "linkedin_url": "$url",
+  "email": {"$array":  {"of": "$email", "number": 3}},
+  "phone": {"$array":  {"of": "$phone", "number": 3}},
+  "location": {
+    "city": "$city",
+    "state": "$state",
+    "nearest_major_city": "$city"
+  },
+  "company": {
+    "parent_name": "$company",
+    "subsidiary_name": "$company",
+    "manager": "$name",
+    "manager_url": "$objectid"
+  }
+}

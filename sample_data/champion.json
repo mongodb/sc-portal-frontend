@@ -1,0 +1,48 @@
+{
+  "firstName": "$first",
+  "lastName": "$last",
+  "fullName": "$name",
+  "preferredName": "$first",
+  "role": "$profession",
+  "social": {
+    "linkedInUrl": "$url",
+    "twitter": "$url"
+  },
+  "email": "$email",
+  "phones": {
+    "$array": {"of": {
+      "type": {"$choose": {"from": ["cell","home","office"]}},
+      "phoneNumber": "$phone"
+    },
+      "number": 3
+    }
+  },
+  "address": {
+    "city": "$city",
+    "state": "$state",
+    "nearestMajorCity": "$city",
+    "location": "$coordinates"
+  },
+  "account": {
+    "name": "$company",
+    "_id": "$oid",
+    "salesForceId": "$url"
+  },
+  "champion": {
+    "status": {"$choose": {"from": ["Potential","Growing","Tested","Established","Inactive","Transferred"]}},
+    "championType": {"$choose": {"from": ["Deal","Technical"]}},
+    "strength": {"$choose": {"from": [1,2,3,4,5]}},
+    "family": {
+      "married": "$bool",
+      "kids": {"$array": {"of": "$name", "number": 2}}
+    },
+    "interests": {"$array": {"of": "$animal", "number": 2}},
+    "productInterests": {"$array": {"of": {"$choose": {"from": ["Atlas","Mobile","Data Archive","Enterprise Advanced","Community","Education","Device Sync"]}}, "number": 2}}
+  },
+  "firstContacted": {"$date": {"min": "2020-01-01",
+    "max": "2022-12-31"
+  }},
+  "lastContacted": {"$date": {"min": "2020-01-01",
+    "max": "2022-12-31"
+  }}
+}

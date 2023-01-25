@@ -1,0 +1,24 @@
+{
+  "title": "$word",
+  "description": "$sentence",
+  "dataSize": {
+    "$array": {"of":  {
+      "name": "$animal",
+      "recordCount": {"$integer": {"min": 0, "max": 99999999999999}},
+      "avgRecordSize": {"$floating": {"min": 0, "max": 100, "fixed": 3}}
+    },
+      "number": 3
+    }
+
+  },
+  "workload": {
+    "_id": "$oid",
+    "name": "$name"
+  },
+  "query" : {
+
+  },
+  "dataGrowth": {
+
+  }
+}

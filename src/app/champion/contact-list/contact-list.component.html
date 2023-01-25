@@ -1,0 +1,92 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-2">
+        <span class="card-title h5">Contact Search</span>
+      </div>
+      <div class="align-items-end col-10">
+        <form [formGroup]="searchForm" (ngSubmit)="contactSearch()">
+          <div class="bg-white border-radius-lg d-flex me-2">
+            <input type="text" class="form-control border-opacity-25 ps-3" formControlName="contact_name" placeholder="Search..">
+            <button class="btn bg-gradient-dark my-1 me-1" type="submit" [disabled]="searchForm.invalid">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th class="text-uppercase text-secondary opacity-7">Name</th>
+            <th class="text-uppercase text-secondary opacity-7">Contact Info</th>
+            <th class="text-secondary opacity-7"></th>
+            <th class="text-uppercase text-secondary opacity-7">Company</th>
+            <th class="text-uppercase text-secondary opacity-7">Role</th>
+            <th class="text-uppercase text-secondary opacity-7">Champion</th>
+            <th class="text-uppercase text-secondary opacity-7">Last Contact</th>
+            <th class="text-secondary opacity-7"></th>
+          </tr>
+        </thead>
+        <tbody  *ngIf="contacts | async as contacts; else emptyContacts">
+          <ng-container *ngFor="let contact of contacts; index as i" >
+            <tr>
+              <td class="text-sm text-secondary">
+                  <a href="#" [routerLink]="['/champion',contact._id]"><h6 class="mb-0 text-xs">{{contact.fullName}}</h6></a>
+              </td>
+              <td class="text-sm text-secondary">
+                <a *ngIf="contact.email" href="mailto:{{contact.email}}">{{ contact.email }}</a>
+              </td>
+              <td class="text-sm text-secondary">
+                <a href="{{contact.social.linkedInUrl}}" *ngIf="contact.social.linkedInUrl" target="_blank"><i class="bi bi-linkedin"></i></a>
+                <a class="ms-2" href="{{contact.social.twitter}}" *ngIf="contact.social.twitter" target="_blank"><i class="bi bi-twitter" ></i></a>
+              </td>
+              <td class="text-sm text-secondary">
+                <div *ngIf="contact.account">{{ contact.account.name}}</div>
+              </td>
+              <td class="text-sm text-secondary">
+                {{ contact.role }}
+              </td>
+              <td class="text-sm text-secondary">
+                <span *ngIf="contact.champion">{{ contact.champion.championType }}</span>
+              </td>
+              <td class="text-sm text-secondary">
+                <span class="text-secondary text-xs font-weight-bold">{{contact.lastContacted | date: 'shortDate'}}</span>
+              </td>
+              <td class="text-sm text-secondary">
+                <i *ngIf="contact.champion" class="bi bi-chevron-expand" (click)="isCollapsed[i] = ! isCollapsed[i]"></i>
+              </td>
+            </tr>
+            <tr #collapse="ngbCollapse" [(ngbCollapse)]="!isCollapsed[i]" class="collapse" *ngIf="contact.champion">
+              <td colspan="8">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary opacity-7">Status</th>
+                      <th class="text-uppercase text-secondary opacity-7">Champion Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-sm text-secondary">{{contact.champion.status}}</td>
+                      <td class="text-sm text-secondary">{{contact.champion.championType}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <ng-template #emptyContacts>
+          <tbody>
+            <tr class="align-content-start">
+            <td colspan="8"><span class="text-center"> No contacts were found matching your criteria.... Please try again</span></td>
+            </tr>
+          </tbody>
+        </ng-template>
+    </table>
+
+  </div>
+
+
+</div>
