@@ -50,4 +50,4 @@ For details on how to contribute to the project and code base see [Contributing]
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Contact [Josh.Smith@mongodb.com](mailto:Josh.Smith@mongodb.com) for questions
