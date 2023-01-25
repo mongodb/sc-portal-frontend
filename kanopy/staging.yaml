@@ -1,0 +1,10 @@
+# #################################
+#
+#  Use this file to set additional configurations for Helm to use for the Kubernetes cluster
+#  See for the example  https://github.com/10gen/helm-charts/blob/master/charts/web-app/values.yaml
+#
+# #################################
+
+
+service:
+  targetPort: 80
