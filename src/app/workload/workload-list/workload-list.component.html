@@ -4,13 +4,16 @@
       <div class="col-2">
         <span class="card-title h5">Workloads</span>
       </div>
-      <div class="align-items-end col-10">
+      <div class="align-items-end col-9">
         <form [formGroup]="searchForm" (ngSubmit)="workloadSearch()">
           <div class="bg-white border-radius-lg d-flex me-2">
             <input type="text" class="form-control border-opacity-25 ps-3" formControlName="workload_name" placeholder="Search..">
             <button class="btn bg-gradient-dark my-1 me-1" type="submit" [disabled]="searchForm.invalid">Search</button>
           </div>
         </form>
+      </div>
+      <div class="col-1 align-items-start align-baseline">
+        <a href="#" [routerLink]="['new']" class="btn btn-success align-items-end mt-1">New</a>
       </div>
     </div>
   </div>

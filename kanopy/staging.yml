@@ -8,3 +8,9 @@
 
 service:
   targetPort: 80
+
+ingress:
+  enabled: true
+  path: /
+  hosts:
+    - sc-portal.sc-north.staging.corp.mongodb.com

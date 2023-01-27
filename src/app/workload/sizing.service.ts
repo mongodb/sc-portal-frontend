@@ -29,6 +29,10 @@ export class SizingService {
     return this.http.post<Sizing>(environment.app_url + 'create', {id: id, update: update});
   }
 
+  createSizing(id: string, sizing: Sizing): Observable<Sizing> {
+    return this.http.post<Sizing>(environment.app_url + '/' + id + '/sizing', sizing);
+  }
+
   getOrgs(name: string): Observable<Account[]> {
     return this.http.post<Account[]>(environment.app_url + 'orgs', {name: name});
   }

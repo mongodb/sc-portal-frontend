@@ -27,6 +27,8 @@ import {SizingListComponent} from "./sizing-list/sizing-list.component";
 import {SizingReviewComponent} from "./sizing-review/sizing-review.component";
 import { WorkloadListComponent } from './workload-list/workload-list.component';
 import { WorkloadDetailComponent } from './workload-detail/workload-detail.component';
+import {AccountModule} from "../account/account.module";
+import {WorkloadService} from "./workload.service";
 
 
 
@@ -63,8 +65,9 @@ import { WorkloadDetailComponent } from './workload-detail/workload-detail.compo
     MatInputModule,
     LayoutModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    AccountModule
   ],
-  providers:[SizingService]
+  providers:[SizingService, WorkloadService]
 })
 export class WorkloadModule { }

@@ -22,6 +22,9 @@ export class WorkloadService {
     return this.http.post<Workload[]>(environment.app_url + 'workloads',{query:query});
   }
 
+  saveWorkload(workload: Workload) {
+    return this.http.post<Workload>(environment.app_url + '/workload', {workload})
+  }
 
   searchWorkloads(name: string): Observable<Workload[]> {
     let query = [];

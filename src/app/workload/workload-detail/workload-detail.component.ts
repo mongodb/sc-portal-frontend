@@ -7,6 +7,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 import {Sizing} from "../models/sizing";
 import {SizingService} from "../sizing.service";
+import {AccountService} from "../../account/account.service";
 
 @Component({
   selector: 'app-workload-detail',
@@ -39,7 +40,7 @@ export class WorkloadDetailComponent implements OnInit{
   id?: string;
   sizings?: Observable<Sizing[]>
 
-  constructor( private fb: FormBuilder, private service: WorkloadService, private activatedRoute: ActivatedRoute, private sizingService: SizingService) {
+  constructor( private fb: FormBuilder, private service: WorkloadService, private activatedRoute: ActivatedRoute, private sizingService: SizingService, private workloadService: WorkloadService, private accountService: AccountService) {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id']
       if (this.id) {
@@ -56,8 +57,13 @@ export class WorkloadDetailComponent implements OnInit{
 
   }
 
-  saveForm(): void {
 
+  //TODO: If the ID isn't sset, then we need to do an Org search in the parent org drop down
+
+  saveForm(): void {
+    let workload: Workload;
+    workload = Object.assign(workload, this.workloadForm.value);
+    this.workloadService.saveWorkload(workload);
   }
 
 

@@ -7,7 +7,7 @@ import {WorkloadListComponent} from "./workload-list/workload-list.component";
 import {WorkloadDetailComponent} from "./workload-detail/workload-detail.component";
 
 const routes: Routes = [
-  {path: 'new', component: SizingCreateComponent},
+  {path: 'new', component: WorkloadDetailComponent},
   {path: ':id', component: WorkloadDetailComponent},
   {path: ':id/sizing', component: SizingCreateComponent},
   {path: ':id/sizing/:sizing_id', component: SizingCreateComponent},

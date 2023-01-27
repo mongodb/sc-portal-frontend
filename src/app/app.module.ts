@@ -18,6 +18,7 @@ import {AccountRoutingModule} from "./account/account-routing.module";
 import {WorkloadRoutingModule} from "./workload/workload-routing.module";
 import {ChampionModule} from "./champion/champion.module";
 import {ChampionRoutingModule} from "./champion/champion-routing.module";
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {ChampionRoutingModule} from "./champion/champion-routing.module";
     FooterComponent,
     HomeComponent,
     SidenavComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
