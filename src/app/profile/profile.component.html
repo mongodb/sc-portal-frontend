@@ -1,0 +1,13 @@
+<div class="card shadow-lg mx-4">
+    <div class="card-header">
+        User Profile
+    </div>
+    <div class="card-body card-blue p-3">
+        <p *ngIf="name$ | async as name">
+            Hello {{name}}!
+        </p>
+
+    </div>
+</div>
+
+

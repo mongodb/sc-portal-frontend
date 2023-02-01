@@ -22,15 +22,19 @@
           <input type="text" class="form-control border-0 ps-3" placeholder="Search..">
           <button class="btn bg-gradient-dark my-1 me-1">Search</button>
         </div>
-      </div>
+      </div>-->
       <ul class="navbar-nav  justify-content-end">
         <li class="nav-item d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+          <a href="#" (click)="signIn()" class="nav-link text-white font-weight-bold px-0" *ngIf="!isAuthenticated$">
             <i class="bi bi-person me-sm-1"></i>
             <span class="d-sm-inline d-none">Sign In</span>
           </a>
+          <a href="#" class="nav-link text-white font-weight-bold px-0" *ngIf="isAuthenticated$" [routerLink]="['profile']">
+            <i class="bi bi-person me-sm-1"></i>
+            <span class="d-sm-inline d-none">Profile</span>
+          </a>
         </li>
-        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+        <!--<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
             <div class="sidenav-toggler-inner">
               <i class="sidenav-toggler-line bg-white"></i>
@@ -38,8 +42,8 @@
               <i class="sidenav-toggler-line bg-white"></i>
             </div>
           </a>
-        </li>
-      </ul>-->
+        </li>-->
+      </ul>
     </div>
   </div>
 </nav>

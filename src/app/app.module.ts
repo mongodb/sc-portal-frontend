@@ -19,6 +19,17 @@ import {WorkloadRoutingModule} from "./workload/workload-routing.module";
 import {ChampionModule} from "./champion/champion.module";
 import {ChampionRoutingModule} from "./champion/champion-routing.module";
 import { LoginComponent } from './login/login.component';
+import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { ProfileComponent } from './profile/profile.component';
+
+
+
+const oktaAuth = new OktaAuth({
+  issuer: 'https://${yourOktaDomain}/oauth2/default',
+  clientId: '${yourClientID}',
+  redirectUri: window.location.origin + '/login/callback'
+});
 
 
 @NgModule({
@@ -29,6 +40,7 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     SidenavComponent,
     LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +54,10 @@ import { LoginComponent } from './login/login.component';
     AccountModule,
     AccountRoutingModule,
     ChampionModule,
-    ChampionRoutingModule
+    ChampionRoutingModule,
+    OktaAuthModule
   ],
-  providers: [AppService],
+  providers: [AppService, { provide: OKTA_CONFIG, useValue: { oktaAuth } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

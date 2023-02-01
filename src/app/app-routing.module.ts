@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
-import {AccountListComponent} from "./account/account-list/account-list.component";
-import {AccountDetailComponent} from "./account/account-detail/account-detail.component";
-import {ContactDetailComponent} from "./champion/contact-detail/contact-detail.component";
-import {ContactListComponent} from "./champion/contact-list/contact-list.component";
+import { OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
+import {ProfileComponent} from "./profile/profile.component";
+
 
 
 const routes: Routes = [
   {path: "home", component: HomeComponent},
+  { path: 'login/callback', component: OktaCallbackComponent },
+  { path: 'profile', component: ProfileComponent, canLoad: [OktaAuthGuard] },
   {
     path: 'account',
     loadChildren: () => import('./account/account-routing.module').then(m => m.AccountRoutingModule)
