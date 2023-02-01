@@ -14,7 +14,10 @@ export class AppComponent {
 
   constructor(private service: AppService, private cookieService: CookieService) {
 
-        this.service.decodeToken(this.cookieService.get('auth_token'))
+        var cookie = this.cookieService.get('auth_token')
+        console.log(this.cookieService.getAll());
+        console.log(cookie);
+        this.service.decodeToken(cookie)
 
 
 
