@@ -96,9 +96,12 @@
             },
             "development": {
               "browserTarget": "ContactTracker:build:development"
+            },
+            "local": {
+              "browserTarget": "ContactTracker:build:local"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "local"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
