@@ -17,9 +17,7 @@ export class WorkloadService {
   }
 
   recentWorkloads(): Observable<Workload[]> {
-    let query = [];
-    query = [{"$match": {}},{"$sort": {"lastUpdate":-1}},{"$limit": 50}];
-    return this.http.post<Workload[]>(environment.app_url + 'workloads',{query:query});
+    return this.http.post<Workload[]>(environment.app_url + 'workload/recent', {});
   }
 
   saveWorkload(workload: Workload) {
@@ -27,7 +25,7 @@ export class WorkloadService {
   }
 
   searchWorkloads(name: string): Observable<Workload[]> {
-    let query = [];
+    /*let query = [];
     query = [{"$match": {}},{"$sort": {"lastUpdate":-1}},{"$limit": 50}];
     if (name) {
       query[0] = {
@@ -40,8 +38,8 @@ export class WorkloadService {
             }
       }
     }
-    console.log(query);
-    return this.http.post<Workload[]>(environment.app_url + 'workloads', {query: query});
+    console.log(query);*/
+    return this.http.post<Workload[]>(environment.app_url + 'workload/search', {name: name});
   }
 
 }
