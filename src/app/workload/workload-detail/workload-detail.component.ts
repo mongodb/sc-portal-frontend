@@ -53,7 +53,7 @@ export class WorkloadDetailComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.sizings = this.sizingService.getSizings();
+    this.sizings = this.sizingService.getSizings(this.id);
 
   }
 

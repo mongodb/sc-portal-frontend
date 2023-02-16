@@ -32,7 +32,7 @@
         <tbody>
           <ng-container *ngFor="let workload of workloads | async; index as i">
             <tr (click)="isCollapsed[i] = ! isCollapsed[i]">
-              <td><a href="#" [routerLink]="['/workload', workload._id]">{{workload.name}}</a></td>
+              <td><a href="#" [routerLink]="['/workload', workload.id]">{{workload.name}}</a></td>
               <td>{{workload.org.name}}</td>
               <td class="text-truncate">{{workload.description | slice:0:40}}</td>
               <td>{{workload.inProduction}}</td>

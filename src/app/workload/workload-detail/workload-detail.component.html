@@ -86,7 +86,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let sizing of sizings">
-            <td><a href="#" [routerLink]="['sizing', sizing._id]">{{sizing.title}}</a></td>
+            <td><a href="#" [routerLink]="['sizing', sizing.id]">{{sizing.title}}</a></td>
             <td>{{sizing.description | slice:0:75}}</td>
             <td>{{ sizing.dateCreated | date: 'short'}}</td>
             <td>{{ sizing.lastUpdated | date: 'short'}}</td>

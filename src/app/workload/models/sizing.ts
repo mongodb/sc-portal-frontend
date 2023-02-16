@@ -4,7 +4,7 @@ import {Environment} from "./environment";
 
 export interface Sizing {
 
-  _id: string;
+  id: string;
   title: string;
   dateCreated: Date;
   lastUpdated: Date;

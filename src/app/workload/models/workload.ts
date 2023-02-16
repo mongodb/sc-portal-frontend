@@ -14,7 +14,7 @@ export interface Workload {
 
   pointsOfContact: Contact[];
 
-  _id: string;
+  id: string;
 
 
 }

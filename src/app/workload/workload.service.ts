@@ -13,7 +13,7 @@ export class WorkloadService {
   constructor(private http: HttpClient) { }
 
   getWorkload(id: string): Observable<Workload> {
-    return this.http.post<Workload>(environment.app_url + 'workload', {id: id});
+    return this.http.get<Workload>(environment.app_url + 'workload/' + id);
   }
 
   recentWorkloads(): Observable<Workload[]> {
@@ -21,7 +21,7 @@ export class WorkloadService {
   }
 
   saveWorkload(workload: Workload) {
-    return this.http.post<Workload>(environment.app_url + '/workload', {workload})
+    return this.http.post<Workload>(environment.app_url + 'workload', {workload})
   }
 
   searchWorkloads(name: string): Observable<Workload[]> {

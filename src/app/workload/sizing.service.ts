@@ -17,20 +17,20 @@ export class SizingService {
 
 
   getSizings(workload_id?: string): Observable<Sizing[]> {
-    return this.http.get<Sizing[]>(environment.app_url + 'sizing');
+    return this.http.get<Sizing[]>(environment.app_url + '/workload/' + workload_id + '/sizing');
   }
 
 
   getSizing(id: string, workload_id: string): Observable<Sizing> {
-    return this.http.post<Sizing>(environment.app_url + 'getSizing', {id: id, workload_id: workload_id});
+    return this.http.get<Sizing>(environment.app_url + 'workload/' + workload_id + '/sizing/' + id);
   }
 
-  updateSizing(id: string, update: object): Observable<Sizing> {
-    return this.http.post<Sizing>(environment.app_url + 'create', {id: id, update: update});
+  updateSizing(id: string, update: Sizing): Observable<Sizing> {
+    return this.http.post<Sizing>(environment.app_url + 'workload/' + update.workload.id + '/sizing/' + id, {id: id, update: update});
   }
 
   createSizing(id: string, sizing: Sizing): Observable<Sizing> {
-    return this.http.post<Sizing>(environment.app_url + '/' + id + '/sizing', sizing);
+    return this.http.post<Sizing>(environment.app_url + 'workload/' + sizing.workload.id + '/sizing', sizing);
   }
 
   getOrgs(name: string): Observable<Account[]> {

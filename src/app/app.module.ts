@@ -9,7 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import {AppService} from "./app.service";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {WorkloadModule} from "./workload/workload.module";
@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { ProfileComponent } from './profile/profile.component';
+import {ContentTypeInterceptor} from "./content-type.interceptor";
 
 
 
@@ -57,7 +58,7 @@ const oktaAuth = new OktaAuth({
     ChampionRoutingModule,
     OktaAuthModule
   ],
-  providers: [AppService, { provide: OKTA_CONFIG, useValue: { oktaAuth } }],
+  providers: [AppService, { provide: OKTA_CONFIG, useValue: { oktaAuth } }, { provide: HTTP_INTERCEPTORS, useClass: ContentTypeInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
