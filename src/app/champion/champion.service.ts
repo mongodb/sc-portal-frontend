@@ -16,26 +16,15 @@ export class ChampionService {
 
   recentContacts(): Observable<Contact[]> {
     let query = [];
-    query = [{"$sort": {"lastContacted": -1}}, {"$limit": 50}];
-    return this.http.post<Contact[]>(environment.app_url + 'getContacts', {query: query})
+    return this.http.get<Contact[]>(environment.app_url + 'contact/recent')
   }
 
   contactSearch(name?: string): Observable<Contact[]> {
-    let query = [];
-    query = [{
-      "$search": {
-        "text": {
-          "query":name,
-          "path": ["fullName","email","account.name"]
-        }
-      }
-    },{"$sort": {"lastContacted": -1}}];
-
-    return this.http.post<Contact[]>(environment.app_url + 'getContacts', {query:query})
+    return this.http.post<Contact[]>(environment.app_url + 'contact/search', {name:name})
   }
 
   getContact(id: string):Observable<Contact> {
-    return this.http.post<Contact>(environment.app_url + 'getContact', {id: id})
+    return this.http.get<Contact>(environment.app_url + 'contact/' + id)
   }
 
   saveContact(id: string,data: object ): void {

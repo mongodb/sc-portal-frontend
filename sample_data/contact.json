@@ -5,8 +5,12 @@
   "preferredName": "$first",
   "role": "$profession",
   "social": {
-    "linkedInUrl": "$url",
-    "twitter": "$url"
+    "$array": {"of": {
+      "type": {"$choose": {"from": ["LINKED_IN","TWITTER","FACEBOOK","DISCORD","TIK_TOK","SNAPCHAT"]}},
+      "url": "$url"
+    },
+      "number": 3
+    }
   },
   "email": "$email",
   "phones": {

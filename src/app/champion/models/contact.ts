@@ -1,18 +1,16 @@
 import {Address} from "./address";
 import {Account} from "../../account/models/account";
 import {Champion} from "./champion";
+import {Social} from "./social";
 
 export interface Contact {
-  _id: string;
+  id: string;
   firstName: string;
   lastName: string;
   fullName: string;
   preferredName: string;
 
-  social: {
-    linkedInUrl: string;
-    twitter: string;
-  }
+  social: Social[];
 
   role: string;
 
